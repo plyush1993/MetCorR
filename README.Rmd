@@ -22,10 +22,9 @@ QC-based signal drift correction for metabolomics data using GAMs, with modes fo
 You can install the development version of MetCorR like so:
 
 ``` r
-if(!"remotes" %in% rownames(installed.packages())){
-  install.packages("remotes")
+if (!"remotes" %in% rownames(installed.packages())) {
+  install.packages("remotes")}
 remotes::install_github("plyush1993/MetCorR", build_vignettes = TRUE)
-}
 ```
 
 ## Example
@@ -48,7 +47,5 @@ out <- MetCorR(
   batch    = example_meta$batch,
   qc_label = "QC"
 )
-
-head(out)
 ```
 
