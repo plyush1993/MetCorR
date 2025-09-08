@@ -26,10 +26,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
-Basic example of usage
-
-## Code
 ```{r}
 library(MetCorR)
 
@@ -46,6 +42,4 @@ out <- MetCorR(
   batch    = example_meta$batch,
   qc_label = "QC"
 )
-
-head(out)
 ```
