@@ -1,0 +1,51 @@
+---
+title: "MetCorR: Quick Start"
+author: "MetCorR Authors"
+date: "`r format(Sys.Date())`"
+output:
+  rmarkdown::html_vignette:
+    toc_depth: 2
+    number_sections: true
+    fig_caption: true
+vignette: >
+  %\VignetteIndexEntry{MetCorR: Quick Start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4.8,
+  dpi = 120,
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# Introduction
+Basic example of usage
+
+## Code
+```{r}
+library(MetCorR)
+
+# load example data shipped with the package
+data(example_intensity, package = "MetCorR")
+data(example_meta,      package = "MetCorR")
+
+# run correction (method = 2 uses both run order and batch)
+out <- MetCorR(
+  method   = 2,
+  int_data = example_intensity,
+  order    = example_meta$order,
+  class    = example_meta$class,
+  batch    = example_meta$batch,
+  qc_label = "QC"
+)
+
+head(out)
+```
