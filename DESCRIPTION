@@ -1,6 +1,6 @@
 Package: MetCorR
 Type: Package
-Title: GAM-based metabolomics correction
+Title: MetCorR - GAM-based metabolomics correction
 Version: 0.1.0
 Authors@R: c(
     person(
