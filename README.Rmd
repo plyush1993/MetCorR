@@ -13,10 +13,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# MetCorR - QC-based metabolomics LC-MS signal drift correction using GAMs <img src="man/MetCorR_sticker.png" align="right" height="180" width="160"/> 
+# MetCorR - QC-based metabolomics LC-MS signal drift correction using GAMs <img src="man/figures/logo.png" align="right" height="180" width="160">
 
-![Version](https://img.shields.io/github/r-package/v/plyush1993/MetCorR?colorB=blue)
-[![Documentation](https://img.shields.io/badge/documentation-MetCorR-orange.svg?colorB=E91E63)](https://plyush1993.github.io/MetCorR/)
+<!-- badges: start -->
+[![Version](https://img.shields.io/github/r-package/v/plyush1993/MetCorR?colorB=blue)](https://github.com/plyush1993/MetCorR)
+[![Documentation](https://img.shields.io/badge/docs-pkgdown-E91E63.svg)](https://plyush1993.github.io/MetCorR/)
+<!-- badges: end -->
 
 ## Installation
 
