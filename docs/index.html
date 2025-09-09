@@ -64,51 +64,49 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="metcorr">MetCorR<a class="anchor" aria-label="anchor" href="#metcorr"></a>
+<div class="page-header"><h1 id="metcorr---qc-based-metabolomics-lc-ms-signal-drift-correction-using-gams-">MetCorR - QC-based metabolomics LC-MS signal drift correction using GAMs <img src="man/MetCorR_sticker.png" align="right" height="180" width="160"><a class="anchor" aria-label="anchor" href="#metcorr---qc-based-metabolomics-lc-ms-signal-drift-correction-using-gams-"></a>
 </h1></div>
-<p>QC-based signal drift correction for metabolomics data using GAMs, with modes for injection order only or batch + order.</p>
+
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of MetCorR like so:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="st">"remotes"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">}</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"plyush1993/MetCorR"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">"remotes"</span> <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)}</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"plyush1993/MetCorR"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/plyush1993/MetCorR" class="external-link">MetCorR</a></span><span class="op">)</span>
-
-<span class="co"># load example data shipped with the package</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">example_intensity</span>, package <span class="op">=</span> <span class="st">"MetCorR"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">example_meta</span>,      package <span class="op">=</span> <span class="st">"MetCorR"</span><span class="op">)</span>
-
-<span class="co"># run correction (method = 2 uses both run order and batch)</span>
-<span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MetCorR.html">MetCorR</a></span><span class="op">(</span>
-  method   <span class="op">=</span> <span class="fl">2</span>,
-  int_data <span class="op">=</span> <span class="va">example_intensity</span>,
-  order    <span class="op">=</span> <span class="va">example_meta</span><span class="op">$</span><span class="va">order</span>,
-  class    <span class="op">=</span> <span class="va">example_meta</span><span class="op">$</span><span class="va">class</span>,
-  batch    <span class="op">=</span> <span class="va">example_meta</span><span class="op">$</span><span class="va">batch</span>,
-  qc_label <span class="op">=</span> <span class="st">"QC"</span>
-<span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="co">#&gt;   .--.   ,--.         ,--.   ,-----.              ,------.    </span>
-<span class="co">#&gt;   |   '.'   | .---. .-'  '-.'  .--.; .---. ,--.--.|  .--. '   </span>
-<span class="co">#&gt;   |  |'.'|  || .-. :'-.  .-'|  |    | .-. ||  .--'|  '--'.'   </span>
-<span class="co">#&gt;   |  |   |  ||  ---.  |  |  |  '--.;' '-' '|  |   |  |.  .    </span>
-<span class="co">#&gt;   '--'   '--' `----'  '--'   '-----' '---' '--'   '--' '--'   </span>
-<span class="co">#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Method 2 has been selected</span>
-<span class="co">#&gt; Used formula: y ~ s(order, batch)</span>
-<span class="co">#&gt; Fitting GAMs on QC samples...</span>
-<span class="co">#&gt; Predicting for all samples...</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(MetCorR)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># load example data shipped with the package</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">data</span>(example_intensity, <span class="at">package =</span> <span class="st">"MetCorR"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">data</span>(example_meta,      <span class="at">package =</span> <span class="st">"MetCorR"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># run correction (method = 2 uses both run order and batch)</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">MetCorR</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="at">method   =</span> <span class="dv">2</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">int_data =</span> example_intensity,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="at">order    =</span> example_meta<span class="sc">$</span>order,</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="at">class    =</span> example_meta<span class="sc">$</span>class,</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="at">batch    =</span> example_meta<span class="sc">$</span>batch,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="at">qc_label =</span> <span class="st">"QC"</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt;   .--.   ,--.         ,--.   ,-----.              ,------.    </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt;   |   '.'   | .---. .-'  '-.'  .--.; .---. ,--.--.|  .--. '   </span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt;   |  |'.'|  || .-. :'-.  .-'|  |    | .-. ||  .--'|  '--'.'   </span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt;   |  |   |  ||  ---.  |  |  |  '--.;' '-' '|  |   |  |.  .    </span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt;   '--'   '--' `----'  '--'   '-----' '---' '--'   '--' '--'   </span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; Method 2 has been selected</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; Used formula: y ~ s(order, batch)</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; Fitting GAMs on QC samples...</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co">#&gt; Predicting for all samples...</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -142,7 +140,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://plyush1993.github.io/MetCorR/" class="external-link"><img src="https://img.shields.io/badge/documentation-MetCorR-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
