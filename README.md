@@ -1,52 +1,47 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MetCorR
+# MetCorR - QC-based metabolomics LC-MS signal drift correction using GAMs <img src="man/MetCorR_sticker.png" align="right" height="180" width="160"/>
 
-QC-based signal drift correction for metabolomics data using GAMs, with
-modes for injection order only or batch + order.
+![Version](https://img.shields.io/github/r-package/v/plyush1993/MetCorR?colorB=blue)
+[![Documentation](https://img.shields.io/badge/documentation-MetCorR-orange.svg?colorB=E91E63)](https://plyush1993.github.io/MetCorR/)
 
 ## Installation
 
 You can install the development version of MetCorR like so:
 
-``` r
-if (!"remotes" %in% rownames(installed.packages())) {
-  install.packages("remotes")}
-remotes::install_github("plyush1993/MetCorR", build_vignettes = TRUE)
-```
+    if (!"remotes" %in% rownames(installed.packages())) {
+      install.packages("remotes")}
+    remotes::install_github("plyush1993/MetCorR", build_vignettes = TRUE)
 
 ## Example
 
 This is a basic example:
 
-``` r
-library(MetCorR)
+    library(MetCorR)
 
-# load example data shipped with the package
-data(example_intensity, package = "MetCorR")
-data(example_meta,      package = "MetCorR")
+    # load example data shipped with the package
+    data(example_intensity, package = "MetCorR")
+    data(example_meta,      package = "MetCorR")
 
-# run correction (method = 2 uses both run order and batch)
-out <- MetCorR(
-  method   = 2,
-  int_data = example_intensity,
-  order    = example_meta$order,
-  class    = example_meta$class,
-  batch    = example_meta$batch,
-  qc_label = "QC"
-)
-#> 
-#> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#>   .--.   ,--.         ,--.   ,-----.              ,------.    
-#>   |   '.'   | .---. .-'  '-.'  .--.; .---. ,--.--.|  .--. '   
-#>   |  |'.'|  || .-. :'-.  .-'|  |    | .-. ||  .--'|  '--'.'   
-#>   |  |   |  ||  ---.  |  |  |  '--.;' '-' '|  |   |  |.  .    
-#>   '--'   '--' `----'  '--'   '-----' '---' '--'   '--' '--'   
-#> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#> 
-#> Method 2 has been selected
-#> Used formula: y ~ s(order, batch)
-#> Fitting GAMs on QC samples...
-#> Predicting for all samples...
-```
+    # run correction (method = 2 uses both run order and batch)
+    out <- MetCorR(
+      method   = 2,
+      int_data = example_intensity,
+      order    = example_meta$order,
+      class    = example_meta$class,
+      batch    = example_meta$batch,
+      qc_label = "QC"
+    )
+    #> 
+    #> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #>   .--.   ,--.         ,--.   ,-----.              ,------.    
+    #>   |   '.'   | .---. .-'  '-.'  .--.; .---. ,--.--.|  .--. '   
+    #>   |  |'.'|  || .-. :'-.  .-'|  |    | .-. ||  .--'|  '--'.'   
+    #>   |  |   |  ||  ---.  |  |  |  '--.;' '-' '|  |   |  |.  .    
+    #>   '--'   '--' `----'  '--'   '-----' '---' '--'   '--' '--'   
+    #> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #> 
+    #> Method 2 has been selected
+    #> Used formula: y ~ s(order, batch)
+    #> Fitting GAMs on QC samples...
+    #> Predicting for all samples...
