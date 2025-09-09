@@ -1,6 +1,6 @@
 ---
 title: "MetCorR: Quick Start"
-author: "MetCorR Authors"
+author: "Dr. Ivan Plyushchenko"
 date: "`r format(Sys.Date())`"
 output:
   rmarkdown::html_vignette:
