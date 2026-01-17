@@ -11,15 +11,15 @@
 ## Installation
 
 You can install the development version of MetCorR like so:
-
+```r
     if (!"remotes" %in% rownames(installed.packages())) {
       install.packages("remotes")}
     remotes::install_github("plyush1993/MetCorR", build_vignettes = TRUE)
-
+```
 ## Example
 
 This is a basic example:
-
+```r
     library(MetCorR)
 
     # load example data shipped with the package
@@ -48,3 +48,4 @@ This is a basic example:
     #> Used formula: y ~ s(order, batch)
     #> Fitting GAMs on QC samples...
     #> Predicting for all samples...
+```
