@@ -6,7 +6,7 @@
 #'   Row names are sample IDs.
 #' @examples
 #' data(example_intensity, package = "MetCorR")
-#' head(example_intensity)
+#' example_intensity[c(1:5), c(1:2)]
 "example_intensity"
 
 #' Example sample metadata
